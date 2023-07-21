@@ -1,8 +1,10 @@
 <?php
 include('connection.php');
-$name=$_POST['name'];
-$email=$_POST['email'];
-$password=$_POST['password'];
+header("Content-Type: application/json");
+$info = json_decode(file_get_contents('php://input'), true);
+$name=$info['name'];
+$email=$info['email'];
+$password=$info['password'];
 
 $check_email=$mysqli->prepare('select email from users where email=?');
 $check_email->bind_param('s',$email);
